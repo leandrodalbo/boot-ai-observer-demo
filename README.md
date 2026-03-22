@@ -1,6 +1,6 @@
 # boot-ai-observer-demo
 
-A ready-to-run Spring Boot application that demonstrates [boot-ai-observer](../boot-ai-observer/README.md) in action. It exposes endpoints that simulate common production problems — memory pressure, slow responses, and unhandled exceptions — so you can watch the AI observer detect and explain them.
+A ready-to-run Spring Boot application that demonstrates [boot-ai-observer](https://github.com/leandrodalbo/boot-ai-observer) in action. It exposes endpoints that simulate common production problems — memory pressure, slow responses, and unhandled exceptions — so you can watch the AI observer detect and explain them.
 
 ## What the demo does
 
@@ -137,5 +137,3 @@ Once you have verified the demo works, integrate the starter into your own Sprin
 2. Set your API key
 3. Add `ai.observer.ai-provider` and `ai.observer.ai-api-key` to your `application.yml`
 4. Optionally add `prompt.extra-context` to describe your app to the AI
-
-See the [boot-ai-observer README](../boot-ai-observer/README.md) for the full configuration reference.
