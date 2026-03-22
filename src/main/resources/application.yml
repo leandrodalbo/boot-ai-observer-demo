@@ -21,7 +21,7 @@ ai:
     ai-provider: claude
 
     # Your API key. Use an environment variable — never commit the real value.
-    ai-api-key: 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
+    ai-api-key: my-ai-key
 
     # Model to call. Defaults to claude-haiku-4-5-20251001 if omitted.
     ai-model: claude-haiku-4-5-20251001
