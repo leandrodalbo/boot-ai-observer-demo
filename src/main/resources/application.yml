@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: boot-ai-observer-demo
+
+# ---------------------------------------------------------------
+# Actuator — expose the AI Observer endpoint
+# ---------------------------------------------------------------
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, ai-insight, metrics, beans
+
+# ---------------------------------------------------------------
+# AI Observer Starter configuration
+# ---------------------------------------------------------------
+ai:
+  observer:
+
+    # AI provider to use. Accepted values: claude, openai, copilot
+    ai-provider: claude
+
+    # Your API key. Use an environment variable — never commit the real value.
+    ai-api-key: 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
+
+    # Model to call. Defaults to claude-haiku-4-5-20251001 if omitted.
+    ai-model: claude-haiku-4-5-20251001
+
+    # How often (in seconds) a full analysis cycle runs. Default: 900 (15 min).
+    # Set low here so the demo produces insights quickly.
+    interval-seconds: 60
+
+    # Maximum tokens in the AI response.
+    max-tokens: 512
+
+    # ---------------------------------------------------------------
+    # Thresholds — when breached, an early analysis is triggered
+    # (within 60 s, regardless of interval-seconds above)
+    # ---------------------------------------------------------------
+    thresholds:
+      # Heap usage % that triggers an early analysis. Hit /leak to breach this.
+      heap-usage-percent: 70.0
+      # Thread count that triggers an early analysis.
+      thread-count: 50
+      # Error rate % — evaluated during the full analysis cycle.
+      error-rate-percent: 5.0
+
+    # ---------------------------------------------------------------
+    # Prompt customisation
+    # ---------------------------------------------------------------
+    prompt:
+      intro: "We need to analyse our app to find problems. The snapshot contains collected errors, latency and JVM data"
+      extra-context: "This is a demo Spring Boot application showcasing AI Observer.
+        It exposes /hello (normal), /leak (heap pressure), /slow (2 s latency), /error (exceptions).
+        Please return your analysis as plain text readable for anyone. Including non technical people.
+        Technical details only if it is required explaining what needs to be adjusted.        
+        "
+
+    # ---------------------------------------------------------------
+    # Collectors — disable any collector you don't need
+    # ---------------------------------------------------------------
+    collectors:
+      jvm-enabled: true      # heap, threads, CPU, GC
+      latency-enabled: true  # per-endpoint avg/max latency and request count
+      errors-enabled: true   # recent exception messages (last 20)
